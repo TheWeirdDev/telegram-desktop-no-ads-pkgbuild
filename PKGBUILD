@@ -3,7 +3,7 @@ pkgname=telegram-desktop-no-ads
 pkgver=7.1.3
 _td_commit=bc9c263e2bfee06aaab41e82db51a103376030bc
 pkgrel=1
-pkgdesc='Patched Telegram Desktop client without ads'
+pkgdesc='Patched Telegram Desktop client without ads, with premium features unlocked'
 arch=('x86_64')
 url="https://desktop.telegram.org/"
 license=('GPL3')
@@ -64,6 +64,7 @@ makedepends=(
   'tl-expected'
   'vulkan-headers'
 )
+provides=("telegram-desktop")
 conflicts=("telegram-desktop")
 
 # Patches are from feature/remove-ads branch:
@@ -73,16 +74,19 @@ source=(
     "https://github.com/telegramdesktop/tdesktop/releases/download/v${pkgver}/tdesktop-${pkgver}-full.tar.gz"
     "git+https://github.com/tdlib/td.git#tag=${_td_commit}"
     "remove-ads.patch"
+    "local-default-premium.patch"
 )
 sha256sums=(
     "SKIP"
     "SKIP"
     5c3c35f0784b6d9d103a535bb99f4cb1cd432d0dcbe262f6a84230289902021e
+    0634e5d5310515a1c95f45ea3c21a44fa1f06077e6d891dd794c2ab7863b66cf
 )
 
 prepare() {
     cd tdesktop-$pkgver-full
     patch --forward --strip=1 -i "${srcdir}/remove-ads.patch"
+    patch --forward --strip=1 -i "${srcdir}/local-default-premium.patch"
 }
 
 build() {

@@ -1,0 +1,49 @@
+diff --git a/Telegram/SourceFiles/data/data_user.cpp b/Telegram/SourceFiles/data/data_user.cpp
+index 2a5c93a..067a6a8 100644
+--- a/Telegram/SourceFiles/data/data_user.cpp
++++ b/Telegram/SourceFiles/data/data_user.cpp
+@@ -603,7 +603,7 @@ bool UserData::isFake() const {
+ }
+ 
+ bool UserData::isPremium() const {
+-	return flags() & UserDataFlag::Premium;
++	return true;
+ }
+ 
+ bool UserData::isBotInlineGeo() const {
+diff --git a/Telegram/SourceFiles/main/main_session.cpp b/Telegram/SourceFiles/main/main_session.cpp
+index cedcddf..26c954b 100644
+--- a/Telegram/SourceFiles/main/main_session.cpp
++++ b/Telegram/SourceFiles/main/main_session.cpp
+@@ -337,11 +337,11 @@ rpl::producer<> Session::downloaderTaskFinished() const {
+ }
+ 
+ bool Session::premium() const {
+-	return _user->isPremium();
++	return true;
+ }
+ 
+ bool Session::premiumPossible() const {
+-	return premium() || premiumCanBuy();
++	return true;
+ }
+ 
+ bool Session::premiumBadgesShown() const {
+@@ -355,7 +355,7 @@ rpl::producer<bool> Session::premiumPossibleValue() const {
+ 	) | rpl::filter([=](UserData::Flags::Change change) {
+ 		return (change.diff & UserDataFlag::Premium);
+ 	}) | rpl::map([=] {
+-		return _user->isPremium();
++		return true;
+ 	});
+ 	return rpl::combine(
+ 		std::move(premium),
+@@ -364,7 +364,7 @@ rpl::producer<bool> Session::premiumPossibleValue() const {
+ }
+ 
+ bool Session::premiumCanBuy() const {
+-	return _premiumPossible.current();
++	return true;
+ }
+ 
+ bool Session::isTestMode() const {
