@@ -1,7 +1,7 @@
 # https://gitlab.archlinux.org/archlinux/packaging/packages/telegram-desktop
 pkgname=telegram-desktop-no-ads
-pkgver=7.1.3
-_td_commit=bc9c263e2bfee06aaab41e82db51a103376030bc
+pkgver=7.2.9
+_td_commit=ea97bcdd3a15523c58ddfe772b4547187cf5bbeb
 pkgrel=1
 pkgdesc='Patched Telegram Desktop client without ads, with premium features unlocked'
 arch=('x86_64')
