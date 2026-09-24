@@ -63,6 +63,7 @@ makedepends=(
   'range-v3'
   'tl-expected'
   'vulkan-headers'
+  'tlottie'
 )
 provides=("telegram-desktop")
 conflicts=("telegram-desktop")
